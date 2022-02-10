@@ -112,16 +112,12 @@ void kinit()
   argv[_argc] = NULL;
   free(_cmdline);
 
+  INFO("kmain: loading %s...", argv[0]);
+
   if (strcmp(argv[0], "kshell") == 0) {
-    INFO("kmain: loading %s...", argv[0]);
     kshell(argc, argv);
   } else {
-    // TODO: create task
-
-    // INFO("kmain: switching to usermode... (%s)", argv[0]);
-    //
-    // k_execv(argv[0], argv);
-    WARN("cannot execute: %s", saved_cmdline);
+    k_execv(argv[0], argv);
   }
 
   k_exit(EXIT_FAILURE);
