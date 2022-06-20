@@ -12,7 +12,7 @@ print("UDP server up and listening")
 while True:
     try:
         (message, address) = server.recvfrom(BUFSIZE)
-        print("Client said: {}".format(message.decode()))
+        print(f"Client said: {message.decode()}")
 
         server.sendto("Hello from the host!".encode(), address)
         print("Message sent!")

@@ -42,10 +42,8 @@ def fix_stacktrace():
         offset = len(" - ???+0x0\n")
 
         for line in logfile.readlines():
-            matches = stacktrace.match(line)
-
-            if matches:
-                addr = int(matches.group(1), 16)
+            if matches := stacktrace.match(line):
+                addr = int(matches[1], 16)
                 [symbol_addr, name] = find_symbol(addr)
                 addr_offset = '+0x{:x}'.format(addr - symbol_addr)
                 print(f"{line[:-offset]} - {name}{addr_offset}")
